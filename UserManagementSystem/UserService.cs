@@ -114,7 +114,7 @@ namespace UserManagementSystem.Services
             await _repository.SaveAsync();
             return existingUser;
         }
-        private string HashPassword(string password)
+        public string HashPassword(string password)
         {
             using var sha = System.Security.Cryptography.SHA256.Create();
             var bytes = System.Text.Encoding.UTF8.GetBytes(password);

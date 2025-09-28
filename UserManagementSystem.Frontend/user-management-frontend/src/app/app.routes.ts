@@ -5,12 +5,14 @@ import { InactiveComponent } from './components/inactive/inactive.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AuthGuard } from '../guards/authGuard';
 import { UsersComponent } from './components/users/users.component';
+import { RegisterComponent } from './components/register/register.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'user', component: WelcomeComponent, canActivate: [AuthGuard], data: { role: 'User' } },
   { path: 'admin', component: UsersComponent, canActivate: [AuthGuard], data: { role: 'Admin' } },
   { path: 'access-denied', component: AccessDeniedComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'inactive', component: InactiveComponent },
   { path: '**', redirectTo: 'login' }
 ];

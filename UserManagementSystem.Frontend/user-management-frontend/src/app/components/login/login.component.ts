@@ -39,6 +39,10 @@ export class LoginComponent {
     });
   }
 
+  navigateToRegister(): void {
+    this.router.navigate(['/register']);
+  }
+
   onSubmit(): void {
     if (this.loginForm.invalid) {
       this.snackBar.open('Please fill in all required fields correctly.', 'Close', { duration: 3000 });
@@ -66,5 +70,5 @@ export class LoginComponent {
         this.snackBar.open(errorMessage, 'Close', { duration: 3000 });
       }
     });
-  }
+  }  
 }
