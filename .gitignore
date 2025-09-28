@@ -1,0 +1,25 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/UserManagementSystem/bin/Debug/net8.0
+/UserManagementSystem/obj
+/UserManagementSystem.API/.vs/UserManagementSystem.API/copilot-chat/609b6851/sessions
+/UserManagementSystem.API/.vs/UserManagementSystem.API/CopilotIndices/17.14.1204.46620
+/UserManagementSystem.API/.vs/UserManagementSystem.API/DesignTimeBuild
+/UserManagementSystem.API/.vs/UserManagementSystem.API/FileContentIndex
+/UserManagementSystem.API/.vs/UserManagementSystem.API/config
+/.vs
+/UserManagementSystem.API/bin/Debug/net8.0
+/UserManagementSystem.API/.vs/UserManagementSystem.API/v17
+/UserManagementSystem.API/obj
+/UserManagementSystem.EF/bin/Debug/net8.0
+/UserManagementSystem.EF/obj
+/UserManagementSystem.Frontend/node_modules
+/UserManagementSystem.Frontend/user-management-frontend/.vscode
+/UserManagementSystem.Models/bin/Debug/net8.0
+/UserManagementSystem.Models/obj
+/UserManagementSystem.Repository/bin/Debug/net8.0
+/UserManagementSystem.Repository/obj/Debug/net8.0/ref
+/UserManagementSystem.Repository/obj/Debug/net8.0
+/UserManagementSystem.Repository/obj

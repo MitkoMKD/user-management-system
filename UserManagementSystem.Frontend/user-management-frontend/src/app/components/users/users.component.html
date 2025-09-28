@@ -1,0 +1,119 @@
+<div class="container">
+  <button mat-raised-button color="warn" (click)="logOut()" class="logout-button">
+    Logout
+  </button>
+  <h2>User Management</h2>
+  
+  <!-- Search Bar -->
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Search Users</mat-label>
+    <input matInput placeholder="Search by username or email" (input)="onSearch($event)">
+  </mat-form-field>
+
+  <!-- User Form -->
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username">
+      <mat-error *ngIf="userForm.get('username')?.hasError('required')">
+        Username is required
+      </mat-error>
+      <mat-error *ngIf="userForm.get('username')?.hasError('minlength')">
+        Username must be at least 3 characters
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email">
+      <mat-error *ngIf="userForm.get('email')?.hasError('required')">
+        Email is required
+      </mat-error>
+      <mat-error *ngIf="userForm.get('email')?.hasError('email')">
+        Invalid email format
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput type="passwordHash" formControlName="passwordHash">
+      <mat-error *ngIf="userForm.get('passwordHash')?.hasError('required')">
+        Password is required
+      </mat-error>
+      <mat-error *ngIf="userForm.get('passwordHash')?.hasError('minlength')">
+        Password must be at least 6 characters
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>FullName</mat-label>
+      <input matInput formControlName="fullName">
+      <mat-error *ngIf="userForm.get('fullName')?.hasError('required')">
+        fullName is required
+      </mat-error>
+      <mat-error *ngIf="userForm.get('fullName')?.hasError('minlength')">
+        fullName must be at least 3 characters
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Role</mat-label>
+      <mat-select formControlName="role">
+        <mat-option value="Admin">Admin</mat-option>
+        <mat-option value="User">User</mat-option>
+      </mat-select>
+      <mat-error *ngIf="userForm.get('role')?.hasError('required')">
+        Role is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="isActive">Active</mat-checkbox>
+
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid">
+        {{ isEditing ? 'Update' : 'Create' }} User
+      </button>
+      <button mat-raised-button color="warn" type="button" (click)="resetForm()" *ngIf="isEditing">
+        Cancel
+      </button>
+    </div>
+  </form>
+
+  <!-- User Table -->
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef>Username</th>
+      <td mat-cell *matCellDef="let user">{{ user.username }}</td>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+    </ng-container>
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef>Role</th>
+      <td mat-cell *matCellDef="let user">{{ user.role }}</td>
+    </ng-container>
+    <ng-container matColumnDef="fullName">
+      <th mat-header-cell *matHeaderCellDef>FullName</th>
+      <td mat-cell *matCellDef="let user">{{ user.fullName }}</td>
+    </ng-container>
+    <ng-container matColumnDef="isActive">
+      <th mat-header-cell *matHeaderCellDef>Active</th>
+      <td mat-cell *matCellDef="let user">{{ user.isActive ? 'Yes' : 'No' }}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let user">
+        <button mat-icon-button color="primary" (click)="editUser(user)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteUser(user.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
