@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -5,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
 using UserManagementSystem.API.Middlewares;
+using UserManagementSystem.API.Validators;
 using UserManagementSystem.EF;
 using UserManagementSystem.Models;
 using UserManagementSystem.Repository;
@@ -27,6 +29,13 @@ builder.Services.AddDbContext<UserManagementSystemDbContext>(options =>
 builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRepository<User>, Repository>();
+
+builder.Services.AddControllers()
+    .AddFluentValidation(config =>
+    {
+        config.RegisterValidatorsFromAssemblyContaining<RegisterUserValidator>();
+        config.AutomaticValidationEnabled = true;
+    });
 
 builder.Services.AddAuthentication(options =>
 {
