@@ -46,18 +46,6 @@ namespace UserManagementSystem.Repository
             return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
         }
 
-        public User GetByIdWithIncludes(int id)
-        {
-            // No navigation properties to include, so same as GetById
-            return _context.Users.AsNoTracking().FirstOrDefault(u => u.Id == id);
-        }
-
-        public async Task<User> GetByIdWithIncludesAsync(int id)
-        {
-            // No navigation properties to include, so same as GetByIdAsync
-            return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
-        }
-
         public bool Remove(int id)
         {
             var user = _context.Users.Find(id);
